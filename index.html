@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Callbacks Practice | 1</title>
+</head>
+
+<body>
+	<p id="timer_tx"></p>
+	<p id="timer_ca"></p>
+	<script>
+		//	Part 1:
+		//	The following code works. Your job is to understand it.
+		//	Trace the code, starting with the call to timeFunction
+		//	at the bottom, all the way through to the final call to
+		//	displayResults. Write out the code path on paper.
+
+
+		//	Part 2 (optional):
+		//	The URL
+		//		https://fonts.googleapis.com/css?family=Lora
+		//	is located in california.
+		//
+		//	Write a function, getDataFromCalifornia, which times the
+		//	request to that URL. Put that time in the div #timer_ca above.
+
+
+
+		// this function is setting the paramaters to get the time it takes to call the server in Texas. It starts by setting the time to start the timer right now, then to display the results in the timer_tx space. 
+		/*function timeFunction(functionToTime) {
+			var startTime = Date.now();
+			functionToTime(function () {
+				displayResults(startTime, document.getElementById("timer_tx"));
+			});
+		}
+
+		// this function is the one actually calling the URL in Texas and calls in the later function "doXHR" to get the information. 
+
+		function getDataFromTexas(callback) {
+			var url = "https://code.jquery.com/jquery-2.2.0.min.js";
+			doXHR(url, callback);
+		}
+
+		// this function is the one responsible for returning the information to us IF WE GET this information. Our XML request is sent to Texas, if it recieves the data it needs (i.e time) it logs it in our callback. 
+		function doXHR(url, callback) {
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState == 4 &&
+					xhr.status == 200) {
+					callback(xhr.response); //this is where we CALLBACK the xhr.response and use that to document the amount of time it takes to recieve the answer
+				}
+			}
+			xhr.open("GET", url, true); // this is where we say we want to GET the information, from the url, and return it if it's true
+			xhr.send(); // this is our send function being called
+		}
+
+		// this function is what tells the browser to display in the view
+		function displayResults(startTime, element) {
+			var endTime = Date.now();
+			var pre = "It took ";
+			var post = "ms to get the data!";
+			element.innerHTML = pre + (endTime - startTime) + post; // here we are defining where to put our previously defined variables "pre" and "post" as well as  setting the math for how to arrive at the total number of ms. 
+		}
+
+		// here is where the entire function is called to start running. 
+		timeFunction(getDataFromTexas);*/
+
+		function timeFunction(functionToTime) {
+			var startTime = Date.now();
+			functionToTime(function () {
+				displayResults(startTime, document.getElementById("timer_ca"));
+			});
+		}
+		
+		function getDataFromCalifornia(callback) {
+			var url = "https://fonts.googleapis.com/css?family=Lora";
+			doXHR(url, callback);
+		}
+		
+		function doXHR (url, callback) {
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState == 4 &&
+				   xhr.status == 200) {
+					callback(xhr.response);
+				}
+			}
+			xhr.open("GET", url, true);
+			xhr.send();
+		}
+		
+		function displayResults(startTime, element) {
+			var endTime = Date.now();
+			var pre = "It took ";
+			var post = "ms to get the data!";
+			element.innerHTML = pre + (endTime - startTime) + post; 
+		}
+		
+		timeFunction(getDataFromCalifornia);
+	</script>
+</body>
+
+</html>
